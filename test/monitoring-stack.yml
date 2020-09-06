@@ -140,10 +140,8 @@ services:
     networks:
       - mon-transit
       - ddb-database
-    ports:
-      - 9216:9216
     environment:
-      - MONGODB_URI=mongodb://mongodb_exporter:s3cr3tpassw0rd@mongodb_rep-1:27017,mongodb_rep-2:27017,mongodb_rep-3:27017?authSource=admin
+      - MONGODB_URI=mongodb://mongodb_exporter:s3cr3tpassw0rd@mongodb_rep-1:27017,mongodb_rep-2:27017,mongodb_rep-3:27017/?authSource=admin
 
   unsee:
     image: cloudflare/unsee:v0.9.2
