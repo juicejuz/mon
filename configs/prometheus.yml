@@ -19,16 +19,21 @@
 # * --------------------------------------------------------------------------------
 ##
 
+
 global:
   scrape_interval:     15s
   evaluation_interval: 15s
-
+  
   external_labels:
-    monitor: 'monitoring'
+    monitor: 'SwarmTV'
 
 rule_files:
-  - "ddb_node.rules.yml"
-  - "ddb_task.rules.yml"
+  - "node_cpu_rules.yml"
+  - "node_ram_rules.yml"
+  - "node_hdd_rules.yml"
+  - "node_gv0_rules.yml"
+  - "task_cpu_rules.yml"
+  - "task_ram_rules.yml"
 
 alerting:
   alertmanagers:
@@ -47,6 +52,13 @@ scrape_configs:
       - 'mongodb-exporter'
       type: 'A'
       port: 9216
+    
+  - job_name: 'elasticsearch_exporter'
+    dns_sd_configs:
+    - names:
+      - 'elasticsearch_exporter'
+      type: 'A'
+      port: 9114
 
   - job_name: 'cadvisor'
     dns_sd_configs:

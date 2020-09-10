@@ -1,5 +1,5 @@
 ##
-# Copyright 2020 [SM-4.0 TV] @Vodafone.de & @OpenAdvice
+# Copyright 2020 @dave-db.com
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,11 +19,20 @@
 # * --------------------------------------------------------------------------------
 ##
 
-#!/bin/sh -e
+route:
+  receiver: 'netcool_messagebus_probe'
+  group_by: [generatorURL, startsAt, endsAt, alertname, container_label_com_docker_swarm_task_name, container_label_com_docker_swarm_node_id]
+  #group_by: [...]
+  group_wait: 10s
+  group_interval: 10s
+  repeat_interval: 10s
 
-NODE_NAME=$(cat /etc/nodename)
-echo "node_meta{node_id=\"$NODE_ID\", container_label_com_docker_swarm_node_id=\"$NODE_ID\", node_name=\"$NODE_NAME\"} 1" > /etc/node-exporter/node-meta.prom
-
-set -- /bin/node_exporter "$@"
-
-exec "$@"
+receivers:
+  - name: 'netcool_messagebus_probe'
+    webhook_configs:
+    - url: 'http://10.16.8.61:8181/probe/dockerPreProd'
+      send_resolved: true
+      http_config:
+       basic_auth:
+        username: dockerswarm
+        password: sm40!2019

@@ -20,24 +20,28 @@
  * --------------------------------------------------------------------------------
  -->
 
-# Docker Production Environment Monitoring
+# Prometheus
+<[back](../README)
 
-## Prometheus
-> see [here](./guides/prom)
-
-## AlertManager
-> see [here](./guides/alertManager)
-
-## Unsee
-> see [here]()
-
-## Grafana
-> see [here]()
-
+## Alert Rules
+### Node Alerts
+- Node CPU Usage:
+    > see alert descriptions [here](./node_cpu_usage)
+- Node RAM Usage:
+    > see alert descriptions [here](./node_ram_usage)
+- Node HDD Usage:
+    > see alert descriptions [here](./node_hdd_usage)
+- Node Storage gv0 Usage:
+    > see alert descriptions [here](./node_gv0_usage)
+### Task Alerts
+- Task CPU Usage
+    > see alert description [here](./task_cpu_usage)
+- Task RAM Usage
+    > see alert description [here](./taks_ram_usage)
 
 ## License
 
 ![LICENCE](https://img.shields.io/github/license/davedb459/davedb-api)
 
-- **[Apache2.0 license](./LICENSE)**
+- **[Apache2.0 license](http://www.apache.org/licenses/LICENSE-2.0)**
 - Copyright 2020 © <a href="https://github.com/davedb459/davedb.api.git" target="_blank">dave-db.com</a>.
