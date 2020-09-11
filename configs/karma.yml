@@ -1,0 +1,104 @@
+##
+# Copyright 2020 @dave-db.com
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+##
+
+##
+# * --------------------------------------------------------------------------------
+# * Description:
+# *        ToDo:
+# * --------------------------------------------------------------------------------
+##
+
+alertmanager:
+  interval: 1m
+  servers:
+    - name: production
+      uri: http://monitoring_alertmanager:9090
+      timeout: 20s
+      proxy: false
+
+alertAcknowledgement:
+    enabled: true
+    duration: 15m0s
+    author: karma
+    commentPrefix: ACK!
+
+annotations:
+  default:
+    hidden: true
+  hidden: []
+  visible: 
+    - summary
+
+filters: 
+  defaults: []
+
+grid:
+  sorting: 
+    order: startAt
+    reverse: true
+    label: alertname
+    customValues:
+      labels:
+        serverity:
+          clear: 0
+          indeterminate: 1 
+          warning: 2
+          minor: 3
+          major: 4
+          critical: 5
+    
+karma: 
+  name: Docker Swarm TV
+
+labels:
+  color:
+    custom:
+      severity:
+        - value: clear
+          color: "#00FF00"
+        - value: indeterminate
+          color: "#800080"
+        - value: warning
+          color: "#0000FF"
+        - value: minor
+          color: "#FFFF00"
+        - value: major
+          color: "#FF5733"
+        - value: critical
+          color: "#FF0000"
+
+listen:
+  address: "0.0.0.0"
+  port: 8080
+  prefix: /
+
+ui:
+  refresh: 30s
+  hideFiltersWhenIdle: true
+  colorTitlebar: false
+  theme: "dark"
+
+## STACK FILE 
+  #karma:
+  #  image: lmierzwa/karma:v0.70
+  #  networks:
+  #    - mon-frontend
+  #    - mon-transit
+  #  ports:
+  #    - "9094:8080"
+  #  environment:
+  #    - CONFIG_FILE="docs/karma.yml"
+  #  configs:
+  #    - source: karma
+  #      target: docs/karma.yml
